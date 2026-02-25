@@ -15,18 +15,22 @@
   padding: 32px 28px 24px 28px;
   min-width: 340px;
   max-width: 95vw;
-  box-shadow: 0 8px 32px 0 rgba(44,62,80,0.28);
-  position: relative;
-}
-.absent-detail-row {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 18px;
-  background: #18192b;
-  border-radius: 10px;
-  padding: 12px 14px;
-}
+  }
+  @media (max-width: 600px) {
+    .app-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 100;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-shadow: 0 2px 8px 0 rgba(44,62,80,0.06);
+    gap: 12px;
+    margin-bottom: 16px;
 .absent-input {
   padding: 8px 12px;
   border-radius: 8px;
@@ -37,12 +41,20 @@
   font-size: 1em;
 }
 .absent-input:focus {
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
   border: 1.5px solid #00c6ff;
   outline: none;
 }
 #root {
   max-width: 1280px;
   margin: 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    width: 100%;
+    margin-bottom: 18px;
   padding: 2rem;
   text-align: center;
 }
@@ -55,6 +67,12 @@
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    font-size: 1.1em;
+    min-height: 48px;
+    border-radius: 18px;
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
