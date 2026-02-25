@@ -301,23 +301,33 @@ button:focus {
       bottom: 16px;
       right: 16px;
     }
+    .app-header {
+      width: 100%;
+      align-items: stretch;
+    }
+    .gradient-title {
+      width: 100%;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      text-align: left;
+    }
     .search-bar-row {
       flex-direction: column;
       gap: 10px;
       align-items: stretch;
+      width: 100%;
+      margin-bottom: 18px;
     }
     .search-bar {
       margin-right: 0;
       width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 0;
     }
     .button-row {
       flex-direction: column;
       gap: 8px;
       align-items: stretch;
-    }
-    .gradient-title {
-      font-size: 1.5em;
-      margin-bottom: 10px;
     }
   }
 }
