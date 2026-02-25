@@ -1,16 +1,59 @@
-# React + Vite
+# My React Project
+Interactive Student Directory is a simple React-based project that displays a list of students in a clean and organized interface. It allows users to view student details such as name, course, and contact information in styled cards.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Features
+- Add and display students
+- Custom components (Badge, Button, StudentCard, AddStudentForm)
+- Responsive design
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Folder Structure
+```
+my-react-project/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── AddStudentForm.jsx
+│   │   ├── Badge.jsx
+│   │   ├── Button.jsx
+│   │   ├── Button.css
+│   │   ├── StudentCard.jsx
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   ├── main.jsx
+├── package.json
+├── vite.config.js
+├── eslint.config.js
+├── index.html
+├── README.md
+```
 
-## React Compiler
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd my-react-project
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Usage
+Start the development server:
+```bash
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Open your browser and go to `http://localhost:5173` to view the app.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Contributing
+Feel free to submit issues or pull requests for improvements.
+
+## License
+This project is licensed under the MIT License.
