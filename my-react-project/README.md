@@ -1,6 +1,8 @@
 # My React Project
-Interactive Student Directory is a simple React-based project that displays a list of students in a clean and organized interface. It allows users to view student details such as name, course, and contact information in styled cards.
 
+![Student Directory Screenshot](./public/student-directory-screenshot.png)
+
+Interactive Student Directory is a simple React-based project that displays a list of students in a clean and organized interface. It allows users to view student details such as name, course, and contact information in styled cards.
 
 ## Features
 - Add and display students
