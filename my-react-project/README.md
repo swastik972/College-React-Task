@@ -60,7 +60,7 @@ Open your browser and go to `http://localhost:5173` to view the app.
 Feel free to submit issues or pull requests for improvements.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the educational purpose.
 
 ## Tech Stack
 - React
