@@ -156,6 +156,10 @@ button:focus {
   font-size: 13px;
   font-weight: 600;
   margin-right: 8px;
+    box-shadow: 0 2px 16px rgba(44,62,80,0.08);
+    background: #fff;
+    border-radius: 18px;
+    min-height: 80vh;
   margin-bottom: 4px;
   letter-spacing: 1px;
 }
@@ -164,14 +168,67 @@ button:focus {
   color: #23243a;
 }
 .absent-badge {
+    flex-wrap: wrap;
+    gap: 16px;
   background: linear-gradient(90deg, #b6b6b6 0%, #434343 100%);
   color: #fff;
 }
 .badge.top-performer {
   background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
   color: #23243a;
+    margin-bottom: 32px;
   margin-left: 10px;
 }
+  @media (max-width: 900px) {
+    .app-container {
+      max-width: 98vw;
+      padding: 8px;
+      border-radius: 10px;
+      min-height: 60vh;
+    }
+    .app-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .student-list {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .gradient-title {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .app-container {
+      padding: 2px;
+      min-height: 40vh;
+    }
+    .app-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .student-list {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .gradient-title {
+      font-size: 1.3em;
+      margin-bottom: 6px;
+    }
+    .search-bar-row {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .add-btn, .filter-btn {
+      width: 100%;
+      margin: 4px 0;
+      font-size: 1em;
+    }
+  }
 .button-row {
   display: flex;
   gap: 12px;

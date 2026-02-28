@@ -28,11 +28,15 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+  justify-content: center;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: 'Poppins', Arial, sans-serif;
+  letter-spacing: 1px;
 }
 
 button {
@@ -45,9 +49,11 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.08);
 }
 button:hover {
   border-color: #646cff;
+  background: #f6f6ff;
 }
 button:focus,
 button:focus-visible {
@@ -71,8 +77,29 @@ button:focus-visible {
   margin-right: 18px;
   /* Responsive base font size for mobile */
   @media (max-width: 600px) {
+    body {
+      min-width: 0;
+      padding: 0 8px;
+      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+    }
+    h1 {
+      font-size: 2em;
+    }
     html {
       font-size: 15px;
+    }
+    body {
+      min-width: 0;
+      padding: 0 2px;
+      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+    }
+    h1 {
+      font-size: 1.3em;
+    }
+    button {
+      width: 100%;
+      font-size: 1em;
+      padding: 10px 0;
     }
     h1 {
       font-size: 2em;
