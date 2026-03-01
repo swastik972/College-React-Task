@@ -3,7 +3,9 @@ import StudentCard from './components/StudentCard';
 import AddStudentForm from './components/AddStudentForm';
 import './App.css';
 
-const StudentDirectory = () => {
+import { useNavigate } from 'react-router-dom';
+
+const StudentDirectory = ({ onLogout }) => {
   const [students, setStudents] = useState(() => {
     const saved = localStorage.getItem('students');
     return saved ? JSON.parse(saved) : [];
@@ -79,10 +81,20 @@ const StudentDirectory = () => {
     return (matchesName || matchesGrade) && matchesPresent;
   });
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (onLogout) onLogout();
+    navigate('/');
+  };
+
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1 className="gradient-title">Student Directory</h1>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          <h1 className="gradient-title">Student Directory</h1>
+          <button className="add-btn" style={{background: '#e74c3c', color: '#fff', marginLeft: 16, borderRadius: '8px'}} onClick={handleLogout}>Logout</button>
+        </div>
         <div className="search-bar-row">
           <input
             type="text"
