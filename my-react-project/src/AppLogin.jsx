@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
-import MainPage from './components/MainPage';
+import StudentDirectory from './StudentDirectory';
 import './App.css';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login setUserEmail={setUserEmail} />} />
-        <Route path="/main" element={<MainPage userEmail={userEmail} />} />
+        <Route path="/main" element={userEmail ? <StudentDirectory /> : <Login setUserEmail={setUserEmail} />} />
       </Routes>
     </Router>
   );
