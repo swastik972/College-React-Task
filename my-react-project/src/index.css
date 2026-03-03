@@ -32,6 +32,20 @@ body {
   justify-content: center;
 }
 
+@media (max-width: 600px) {
+  body {
+    padding: 0 8px;
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  button {
+    width: 100%;
+    font-size: 1em;
+    padding: 10px 0;
+  }
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -75,38 +89,4 @@ button:focus-visible {
 
 .add-student-form input[name="grade"] {
   margin-right: 18px;
-  /* Responsive base font size for mobile */
-  @media (max-width: 600px) {
-    body {
-      min-width: 0;
-      padding: 0 8px;
-      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
-    }
-    h1 {
-      font-size: 2em;
-    }
-    html {
-      font-size: 15px;
-    }
-    body {
-      min-width: 0;
-      padding: 0 2px;
-      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
-    }
-    h1 {
-      font-size: 1.3em;
-    }
-    button {
-      width: 100%;
-      font-size: 1em;
-      padding: 10px 0;
-    }
-    h1 {
-      font-size: 2em;
-    }
-    body {
-      min-width: 0;
-      padding: 0 2px;
-    }
-  }
 }
