@@ -1,6 +1,5 @@
 
-const StudentCard = ({ student, toggleStatus, removeStudent }) => {
-  // Helper to convert numeric grade to alphabet
+const StudentCard = ({ student, toggleStatus, removeStudent, index = 0 }) => {
   const getGradeLetter = (grade) => {
     if (grade >= 90) return 'A';
     if (grade >= 80) return 'B';
@@ -9,23 +8,52 @@ const StudentCard = ({ student, toggleStatus, removeStudent }) => {
     return 'F';
   };
 
+  const getInitials = (name) => {
+    return name.split(' ').map(n => n[0]).join('').slice(0, 2);
+  };
+
   return (
-    <div className="student-card unique-gradient-card" style={{
-      display: 'flex', flexDirection: 'column', gap: '6px', borderRadius: '16px', boxShadow: '0 2px 12px 0 rgba(44,62,80,0.12)', padding: '14px 10px', minWidth: '180px', background: 'linear-gradient(120deg, #23243a 80%, #ffd200 100%)', color: '#fff', position: 'relative', border: '2px solid #00c6ff', transition: 'transform 0.2s', fontFamily: 'Poppins, Arial, sans-serif', alignItems: 'flex-start'
-    }}>
-      <h3 style={{fontSize: '1.1em', fontWeight: 'bold', marginBottom: '2px', letterSpacing: '0.5px', color: '#fff'}}>{student.name}</h3>
-      <div style={{fontWeight: 'bold', color: '#b3b3ff', marginBottom: '2px', fontSize: '0.95em'}}>Course: <span style={{color: '#fff'}}>{student.course}</span></div>
-      <div className="grade-row" style={{display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px'}}>
-        <span className="grade-label" style={{fontWeight: 600, color: '#b3b3ff', fontSize: '0.95em'}}>Grade:</span>
-        <span className="grade-value" style={{fontSize: '1em', fontWeight: 'bold', color: '#fff'}}>{getGradeLetter(student.grade)}</span>
-        {student.grade >= 90 && <span className="badge top-performer" style={{background: 'linear-gradient(90deg, #ffd200 0%, #f7971e 100%)', color: '#23243a', fontSize: '0.85em', padding: '2px 10px', borderRadius: '12px'}}>Top Performer</span>}
+    <div
+      className="student-card"
+      style={{ animationDelay: `${index * 0.05}s` }}
+    >
+      <div className="card-header">
+        <div>
+          <h3 className="student-name">{student.name}</h3>
+          <div className="card-detail">
+            <span className="card-detail-label">Course:</span>
+            <span className="card-detail-value">{student.course}</span>
+          </div>
+        </div>
+        <div className="student-avatar">{getInitials(student.name)}</div>
       </div>
-      <span className={`badge ${student.isPresent ? 'present-badge' : 'absent-badge'}`} style={{fontSize: '0.85em', padding: '2px 10px', borderRadius: '12px', marginBottom: '2px'}}>{student.isPresent ? 'PRESENT' : 'ABSENT'}</span>
-      <div className="button-row" style={{display: 'flex', gap: '8px', marginTop: '6px', width: '100%'}}>
-        <button className="button outline" style={{flex: 1, minWidth: '60px', fontSize: '0.9em', padding: '6px 0'}} disabled>
-          Toggle
+
+      <div className="card-detail">
+        <span className="card-detail-label">Grade:</span>
+        <span className="card-detail-value">{student.grade !== undefined ? getGradeLetter(student.grade) : '—'}</span>
+      </div>
+
+      <div className="badge-row">
+        <span className={`badge ${student.isPresent ? 'present-badge' : 'absent-badge'}`}>
+          {student.isPresent ? '● Present' : '● Absent'}
+        </span>
+        {student.grade >= 90 && (
+          <span className="badge top-performer">⭐ Top Performer</span>
+        )}
+      </div>
+
+      {student.reason && !student.isPresent && (
+        <div className="card-detail">
+          <span className="card-detail-label">Reason:</span>
+          <span className="card-detail-value">{student.reason}</span>
+        </div>
+      )}
+
+      <div className="button-row">
+        <button className="card-action-btn toggle" onClick={() => toggleStatus(student.id)}>
+          {student.isPresent ? 'Mark Absent' : 'Mark Present'}
         </button>
-        <button className="button danger" style={{flex: 1, minWidth: '60px', fontSize: '0.9em', padding: '6px 0'}} onClick={() => removeStudent(student.id)}>
+        <button className="card-action-btn delete" onClick={() => removeStudent(student.id)}>
           Delete
         </button>
       </div>

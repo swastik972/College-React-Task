@@ -16,6 +16,7 @@ const StudentDirectory = ({ onLogout }) => {
   const [showAbsentModal, setShowAbsentModal] = useState(false);
   const [absentDetails, setAbsentDetails] = useState({});
   const absentStudents = students.filter(s => !s.isPresent);
+  const presentStudents = students.filter(s => s.isPresent);
 
   const handleAbsentDetailChange = (id, field, value) => {
     setAbsentDetails(prev => ({
@@ -91,18 +92,50 @@ const StudentDirectory = ({ onLogout }) => {
   return (
     <div className="app-container">
       <header className="app-header">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <div className="header-top-row">
           <h1 className="gradient-title">Student Directory</h1>
-          <button className="add-btn" style={{background: '#e74c3c', color: '#fff', marginLeft: 16, borderRadius: '8px'}} onClick={handleLogout}>Logout</button>
+          <button className="logout-btn" onClick={handleLogout}>
+            ⎋ Logout
+          </button>
         </div>
+
+        {/* Stats Bar */}
+        <div className="stats-bar">
+          <div className="stat-chip">
+            <div className="stat-icon total">👥</div>
+            <div className="stat-info">
+              <span className="stat-label">Total</span>
+              <span className="stat-value">{students.length}</span>
+            </div>
+          </div>
+          <div className="stat-chip">
+            <div className="stat-icon present">✓</div>
+            <div className="stat-info">
+              <span className="stat-label">Present</span>
+              <span className="stat-value">{presentStudents.length}</span>
+            </div>
+          </div>
+          <div className="stat-chip">
+            <div className="stat-icon absent">✗</div>
+            <div className="stat-info">
+              <span className="stat-label">Absent</span>
+              <span className="stat-value">{absentStudents.length}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Search & Controls */}
         <div className="search-bar-row">
-          <input
-            type="text"
-            placeholder="Search by name or grade..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="search-bar"
-          />
+          <div className="search-wrapper">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              placeholder="Search by name or grade..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="search-bar"
+            />
+          </div>
           <div className="present-filter-group">
             <button
               className={`filter-btn${filterPresent === null ? ' active' : ''}`}
@@ -117,31 +150,46 @@ const StudentDirectory = ({ onLogout }) => {
               onClick={() => setFilterPresent(false)}
             >Absent</button>
           </div>
-          <button className="add-btn" onClick={() => setShowForm(!showForm)}>
-            {showForm ? 'Hide Form' : 'Add Student'}
-          </button>
-          <button className="add-btn" style={{marginLeft: 10}} onClick={() => setShowAbsentModal(true)} disabled={absentStudents.length === 0}>
-            Show Absent List
-          </button>
+          <div className="action-buttons-row">
+            <button className="add-btn" onClick={() => setShowForm(!showForm)}>
+              {showForm ? '✕ Hide' : '＋ Add Student'}
+            </button>
+            <button className="add-btn secondary" onClick={() => setShowAbsentModal(true)} disabled={absentStudents.length === 0}>
+              📋 Absent List
+            </button>
+          </div>
         </div>
       </header>
+
       {showForm && <AddStudentForm addStudent={addStudent} />}
+
       <div className="student-list">
         {filteredStudents.length === 0 ? (
-          <p>No students found. Add a student to get started!</p>
+          <div className="empty-state">
+            <div className="empty-state-icon">📚</div>
+            <div className="empty-state-title">No students found</div>
+            <div className="empty-state-text">
+              {students.length === 0
+                ? "Add your first student to get started!"
+                : "Try adjusting your search or filters."}
+            </div>
+          </div>
         ) : (
-          filteredStudents.map((student) => (
+          filteredStudents.map((student, index) => (
             <StudentCard
               key={student.id}
               student={student}
               toggleStatus={toggleStudentStatus}
               removeStudent={removeStudent}
+              index={index}
             />
           ))
         )}
       </div>
+
+      {/* Absent Students Modal */}
       {showAbsentModal && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && discardAbsentDetails()}>
           <div className="modal-content">
             <h2>Absent Students</h2>
             {absentStudents.length === 0 ? (
@@ -170,7 +218,7 @@ const StudentDirectory = ({ onLogout }) => {
                           className="button outline"
                           style={{padding: '4px 10px', fontSize: '0.9em'}}
                           onClick={() => handleAbsentDetailChange(student.id, 'reason', undefined)}
-                        >Unsave</button>
+                        >Clear</button>
                       )}
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
@@ -192,14 +240,14 @@ const StudentDirectory = ({ onLogout }) => {
                           className="button outline"
                           style={{padding: '4px 10px', fontSize: '0.9em'}}
                           onClick={() => handleAbsentDetailChange(student.id, 'contact', undefined)}
-                        >Unsave</button>
+                        >Clear</button>
                       )}
                     </div>
                   </div>
                 ))}
-                <div style={{marginTop: 18, textAlign: 'right'}}>
-                  <button className="button outline" type="button" onClick={discardAbsentDetails} style={{marginRight: 10}}>Discard Changes</button>
-                  <button className="button primary" type="submit">Save</button>
+                <div className="modal-actions">
+                  <button className="button outline" type="button" onClick={discardAbsentDetails}>Discard</button>
+                  <button className="button primary" type="submit">Save Changes</button>
                 </div>
               </form>
             )}

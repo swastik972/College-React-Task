@@ -20,7 +20,6 @@ const AddStudentForm = ({ addStudent }) => {
   };
 
 
-  // Convert grade letter to numeric value for storage
   const gradeLetterToNumber = (letter) => {
     switch (letter.toUpperCase()) {
       case 'A': return 95;
@@ -47,70 +46,76 @@ const AddStudentForm = ({ addStudent }) => {
   };
 
   return (
-      <form className="add-student-form" onSubmit={handleSubmit} style={{
-        display: 'flex', flexDirection: 'column', gap: '16px', background: '#fff', borderRadius: '14px', boxShadow: '0 2px 16px rgba(44,62,80,0.08)', padding: '24px', maxWidth: '400px', margin: '0 auto', marginBottom: '24px'
-      }}>
-        <label style={{fontWeight: 'bold', marginBottom: '4px'}}>Name
+    <form className="add-student-form" onSubmit={handleSubmit}>
+      <div className="form-title">Add New Student</div>
+
+      <div className="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter student name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Course</label>
+        <input
+          type="text"
+          name="course"
+          placeholder="Enter course name"
+          value={formData.course}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <label className="form-checkbox">
+        <input
+          type="checkbox"
+          name="isPresent"
+          checked={formData.isPresent}
+          onChange={handleChange}
+        />
+        <span>Mark as Present</span>
+      </label>
+
+      {formData.isPresent ? (
+        <div className="form-group">
+          <label>Grade</label>
           <input
             type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
+            name="grade"
+            placeholder="Grade (A, B, C, D, F)"
+            value={formData.grade}
             onChange={handleChange}
+            maxLength={1}
+            pattern="[AaBbCcDdFf]"
+            title="Enter a grade letter: A, B, C, D, or F"
             required
-            style={{width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', marginTop: '4px'}}
           />
-        </label>
-        <label style={{fontWeight: 'bold', marginBottom: '4px'}}>Course
+        </div>
+      ) : (
+        <div className="form-group">
+          <label>Reason for Absence</label>
           <input
             type="text"
-            name="course"
-            placeholder="Course"
-            value={formData.course}
+            name="absentReason"
+            placeholder="Why is this student absent?"
+            value={formData.absentReason}
             onChange={handleChange}
             required
-            style={{width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', marginTop: '4px'}}
           />
-        </label>
-        <label style={{fontWeight: 'bold', marginBottom: '4px'}}>
-          <input
-            type="checkbox"
-            name="isPresent"
-            checked={formData.isPresent}
-            onChange={handleChange}
-            style={{marginRight: '8px'}}
-          /> Present
-        </label>
-        {formData.isPresent ? (
-          <label style={{fontWeight: 'bold', marginBottom: '4px'}}>Grade
-            <input
-              type="text"
-              name="grade"
-              placeholder="Grade (A, B, C, D, F)"
-              value={formData.grade}
-              onChange={handleChange}
-              maxLength={1}
-              pattern="[AaBbCcDdFf]"
-              title="Enter a grade letter: A, B, C, D, or F"
-              required
-              style={{width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', marginTop: '4px'}}
-            />
-          </label>
-        ) : (
-          <label style={{fontWeight: 'bold', marginBottom: '4px'}}>Reason for Absence
-            <input
-              type="text"
-              name="absentReason"
-              placeholder="Reason for absence"
-              value={formData.absentReason}
-              onChange={handleChange}
-              required
-              style={{width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', marginTop: '4px'}}
-            />
-          </label>
-        )}
-        <button type="submit" style={{background: 'linear-gradient(90deg, #a770ef 0%, #f6d365 100%)', color: '#23243a', fontWeight: 'bold', borderRadius: '10px', padding: '10px 0', border: 'none', fontSize: '1.1em', marginTop: '8px'}}>Add Student</button>
-      </form>
+        </div>
+      )}
+
+      <button type="submit" className="form-submit-btn">
+        Add Student
+      </button>
+    </form>
   );
 };
 
